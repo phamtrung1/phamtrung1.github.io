@@ -9,20 +9,20 @@
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Dự án tiêu biểu | Thiên Ân Group"/>
         <meta property="og:site_name" content="Thiên Ân Group"/>
-        <meta property="og:url" content="http://127.0.0.1:8069/du-an"/>
-        <meta property="og:image" content="http://127.0.0.1:8069/web/image/website/1/logo?unique=def63fa"/>
+        <meta property="og:url" content="/du-an"/>
+        <meta property="og:image" content="/web/image/website/1/logo?unique=def63fa"/>
             
         <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:image" content="http://127.0.0.1:8069/web/image/website/1/logo?unique=def63fa"/>
+        <meta name="twitter:image" content="/web/image/website/1/logo?unique=def63fa"/>
         
-        <link rel="canonical" href="http://localhost:8069/du-an"/>
+        <link rel="canonical" href="/du-an"/>
         
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,600,700,800&amp;display=swap&amp;subset=latin,latin-ext,vietnamese"/>
         <link rel="apple-touch-icon" href="/web/image/website/1/favicon?unique=def63fa"/>
         
-        <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "http://localhost:8069/#organization", "name": "Thiên Ân Group", "url": "http://localhost:8069", "logo": "http://localhost:8069/web/image/website/1/logo"}]}</script>
+        <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "/#organization", "name": "Thiên Ân Group", "url": "", "logo": "/web/image/website/1/logo"}]}</script>
         <title>Dự án tiêu biểu | Thiên Ân Group</title>
         <link type="image/x-icon" rel="shortcut icon" href="/web/image/website/1/favicon?unique=def63fa"/>
         <link rel="preload" href="/web/assets/1/7263c61/web.material_symbols_outlined.min.woff2" as="font" crossorigin=""/>
@@ -53,7 +53,7 @@
                     ...{"bus_info": {"last_id": 1201, "worker_version": "saas-19.5-1"}, "server_version": "20.0", "server_version_info": [20, 0, 0, "final", 0, ""]},
                     livechatData: {
                         can_load_livechat: true,
-                        serverUrl: "http://localhost:8069",
+                        serverUrl: "",
                         options: {"header_background_color": "#004E5A", "button_background_color": "#F68A30", "title_color": "#FFFFFF", "button_text_color": "#FFFFFF", "button_text": "C\u1ea7n h\u1ed7 tr\u1ee3? Tr\u00f2 chuy\u1ec7n v\u1edbi ch\u00fang t\u00f4i.", "default_message": "Xin ch\u00e0o! Thi\u00ean \u00c2n Group c\u00f3 th\u1ec3 gi\u00fap g\u00ec cho b\u1ea1n?", "channel_name": "Thi\u00ean \u00c2n Group", "channel_id": 1, "review_link": false, "default_username": "Kh\u00e1ch"},
                     },
                     test_mode: false,
@@ -148,7 +148,7 @@
     </li>
 
     <li role="presentation" class="nav-item ">
-        <a role="menuitem" href="/blog/1" class="nav-link ">
+        <a role="menuitem" href="/blog/" class="nav-link ">
             <span>Tin tức</span>
         </a>
     </li>
@@ -337,7 +337,7 @@
     </li>
 
     <li role="presentation" class="nav-item border-top border-bottom px-0">
-        <a role="menuitem" href="/blog/1" class="nav-link p-3 text-wrap ">
+        <a role="menuitem" href="/blog/" class="nav-link p-3 text-wrap ">
             <span>Tin tức</span>
         </a>
     </li>
@@ -612,7 +612,7 @@
                                     <li><a href="/gioi-thieu">Giới thiệu</a></li>
                                     <li><a href="/gioi-thieu#gia-tri">Giá trị cốt lõi</a></li>
                                     <li><a href="/gioi-thieu#thanh-vien">Công ty thành viên</a></li>
-                                    <li><a href="/blog/1">Tin tức</a></li>
+                                    <li><a href="/blog/">Tin tức</a></li>
                                     <li><a href="/tuyen-dung">Tuyển dụng</a></li>
                                 </ul>
                             </div>
@@ -668,5 +668,27 @@
                 </footer>
             </div>
         
-        </body>
+        
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.querySelector('input[name="search"], .o_searchbar_form input');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            var q = e.target.value.toLowerCase().trim();
+            var cards = document.querySelectorAll('article, [name="blog_post"], div.col-12.col-md-6, div.col-12.col-lg-4, div.ta-news-card');
+            cards.forEach(function(card) {
+                if (!q) { card.style.display = ''; return; }
+                var text = card.textContent.toLowerCase();
+                card.style.display = text.indexOf(q) !== -1 ? '' : 'none';
+            });
+        });
+        var searchForm = searchInput.closest('form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) { e.preventDefault(); });
+        }
+    }
+});
+</script>
+</body>
+
 </html>

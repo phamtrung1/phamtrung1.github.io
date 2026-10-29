@@ -9,21 +9,21 @@
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="关于我们 | Thien An Group"/>
         <meta property="og:site_name" content="Thiên Ân Group"/>
-        <meta property="og:url" content="http://127.0.0.1:8069/zh_CN/gioi-thieu"/>
-        <meta property="og:image" content="http://127.0.0.1:8069/web/image/website/1/logo?unique=def63fa"/>
+        <meta property="og:url" content="/zh_CN/gioi-thieu"/>
+        <meta property="og:image" content="/web/image/website/1/logo?unique=def63fa"/>
         <meta property="og:description" content="Công ty Cổ phần Đầu tư Thiên Ân – doanh nghiệp hệ sinh thái đa ngành: đầu tư, thi công xây dựng, bất động sản, khách sạn, cụm công nghiệp."/>
             
         <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:image" content="http://127.0.0.1:8069/web/image/website/1/logo?unique=def63fa"/>
+        <meta name="twitter:image" content="/web/image/website/1/logo?unique=def63fa"/>
         
-        <link rel="canonical" href="http://localhost:8069/zh_CN/gioi-thieu"/>
+        <link rel="canonical" href="/zh_CN/gioi-thieu"/>
         
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,600,700,800&amp;display=swap&amp;subset=latin,latin-ext,vietnamese"/>
         <link rel="apple-touch-icon" href="/web/image/website/1/favicon?unique=def63fa"/>
         
-        <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "http://localhost:8069/#organization", "name": "Thiên Ân Group", "url": "http://localhost:8069", "logo": "http://localhost:8069/web/image/website/1/logo"}]}</script>
+        <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "/#organization", "name": "Thiên Ân Group", "url": "", "logo": "/web/image/website/1/logo"}]}</script>
         <title>关于我们 | Thien An Group</title>
         <link type="image/x-icon" rel="shortcut icon" href="/web/image/website/1/favicon?unique=def63fa"/>
         <link rel="preload" href="/web/assets/1/7263c61/web.material_symbols_outlined.min.woff2" as="font" crossorigin=""/>
@@ -54,7 +54,7 @@
                     ...{"bus_info": {"last_id": 1201, "worker_version": "saas-19.5-1"}, "server_version": "20.0", "server_version_info": [20, 0, 0, "final", 0, ""]},
                     livechatData: {
                         can_load_livechat: true,
-                        serverUrl: "http://localhost:8069",
+                        serverUrl: "",
                         options: {"header_background_color": "#004E5A", "button_background_color": "#F68A30", "title_color": "#FFFFFF", "button_text_color": "#FFFFFF", "button_text": "\u9700\u8981\u5e2e\u52a9\uff1f\u4e0e\u6211\u4eec\u804a\u5929\u3002", "default_message": "\u60a8\u597d\uff01Thien An Group \u80fd\u4e3a\u60a8\u505a\u4e9b\u4ec0\u4e48\uff1f", "channel_name": "Thi\u00ean \u00c2n Group", "channel_id": 1, "review_link": false, "default_username": "\u8bbf\u95ee\u8005"},
                     },
                     test_mode: false,
@@ -653,5 +653,27 @@
                 </footer>
             </div>
         
-        </body>
+        
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.querySelector('input[name="search"], .o_searchbar_form input');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            var q = e.target.value.toLowerCase().trim();
+            var cards = document.querySelectorAll('article, [name="blog_post"], div.col-12.col-md-6, div.col-12.col-lg-4, div.ta-news-card');
+            cards.forEach(function(card) {
+                if (!q) { card.style.display = ''; return; }
+                var text = card.textContent.toLowerCase();
+                card.style.display = text.indexOf(q) !== -1 ? '' : 'none';
+            });
+        });
+        var searchForm = searchInput.closest('form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) { e.preventDefault(); });
+        }
+    }
+});
+</script>
+</body>
+
 </html>
