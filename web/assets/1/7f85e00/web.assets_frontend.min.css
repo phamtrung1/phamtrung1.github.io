@@ -1319,3 +1319,57 @@
     font-size: 0.85rem !important;
     color: #94a3b8 !important;
 }
+
+
+/* Post footer tag and social share layout */
+#o_wblog_post_content_footer > div:has(.badge) {
+    order: 1 !important;
+}
+#o_wblog_post_content_footer > div:has(.s_share) {
+    order: 2 !important;
+}
+
+/* Recommended Next Post Cards - 3 Columns Layout */
+#o_wblog_post_content .rec-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 14px !important;
+    padding: 1.25rem !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+    text-decoration: none !important;
+}
+
+#o_wblog_post_content .rec-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+    border-color: #00796b !important;
+}
+
+#o_wblog_post_content .rec-card .o_record_cover_container {
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    margin-bottom: 12px !important;
+}
+
+#o_wblog_post_content .rec-card-title {
+    color: #1a1a1a !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.5rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    transition: color 0.2s ease !important;
+}
+
+#o_wblog_post_content .rec-card:hover .rec-card-title {
+    color: #00796b !important;
+}
+
