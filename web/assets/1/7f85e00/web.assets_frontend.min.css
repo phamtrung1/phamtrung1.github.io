@@ -1549,7 +1549,7 @@
     }
 }
 .ta-company-card {
-    display: flex !important;
+    display: flex;
     align-items: center !important;
     gap: 10px !important;
     background: #f8fafc !important;
@@ -1838,5 +1838,100 @@
         padding-left: 10px !important;
         padding-right: 10px !important;
         font-size: 14px !important;
+    }
+}
+
+
+
+/* ========================================================
+   FULL-SCREEN WIDTH MEGA MENUS (LĨNH VỰC & ĐƠN VỊ THÀNH VIÊN)
+   ======================================================== */
+.o_header_standard {
+    position: relative !important;
+}
+
+.o_header_standard .navbar,
+.o_header_standard #o_main_nav,
+.o_header_standard #top_menu,
+.o_header_standard #top_menu_collapse,
+.o_header_standard #top_menu_container,
+.o_header_standard .ta-mega-dropdown {
+    position: static !important;
+}
+
+.o_header_standard .navbar-expand-lg .navbar-nav .dropdown-menu.ta-mega-menu,
+.ta-mega-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    transform: none !important;
+    border-radius: 0 0 16px 16px !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18) !important;
+    border-top: 1px solid #e2e8f0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 3px solid #006666 !important;
+    background: #ffffff !important;
+    z-index: 1070 !important;
+    padding: 0 !important;
+}
+
+@media (min-width: 992px) {
+    .ta-mega-dropdown:hover > .ta-mega-menu,
+    .ta-mega-dropdown > .ta-mega-menu.show {
+        display: block !important;
+        animation: taMegaFadeDown 0.22s ease-out forwards !important;
+    }
+}
+
+/* Base Card Styles */
+.ta-company-card, .ta-field-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-decoration: none !important;
+    transition: all 0.18s ease;
+    min-height: 62px;
+}
+
+.ta-company-card:hover, .ta-field-card:hover {
+    background: #ffffff !important;
+    border-color: #006666 !important;
+    box-shadow: 0 4px 14px rgba(0, 102, 102, 0.14) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* STRICT FILTERING HIDE RULE WITH !important */
+.ta-company-card.ta-hidden,
+.ta-field-card.ta-hidden,
+[data-category].ta-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.ta-mega-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+}
+
+@media (min-width: 1400px) {
+    .ta-mega-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    .ta-mega-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }
