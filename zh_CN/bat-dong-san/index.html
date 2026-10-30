@@ -71,7 +71,7 @@
 
         <div id="wrapwrap" class="  ">
             <a class="o_skip_to_content btn btn-primary rounded-0 visually-hidden-focusable position-absolute start-0" href="#wrap">跳至内容</a>
-                <header id="top" data-anchor="true" data-name="Header" data-extra-items-toggle-aria-label="额外项目按钮" class="  o_header_standard" style=" ">
+                <header id="top" data-anchor="true" data-name="Header" data-extra-items-toggle-aria-label="额外项目按钮" class="  o_header_standard o_no_autohide_menu" style=" ">
     <span id="o_fake_header_disclaimer"></span>
     <nav data-name="Navbar" aria-label="Main" class="navbar navbar-expand-lg navbar-light o_colored_level o_cc d-none d-lg-block ">
         
@@ -84,23 +84,23 @@
         </a>
     
                 
-    <ul role="menu" id="top_menu" class="nav navbar-nav top_menu o_menu_loading me-auto ">
+    <ul role="menu" id="top_menu" class="nav navbar-nav top_menu o_no_autohide_menu o_menu_loading me-auto ">
         
                     
 
-    <li role="presentation" class="nav-item ">
+    <li role="presentation" class="nav-item o_no_autohide_item ">
         <a role="menuitem" href="/zh_CN" class="nav-link ">
             <span>首页</span>
         </a>
     </li>
 
-    <li role="presentation" class="nav-item ">
+    <li role="presentation" class="nav-item o_no_autohide_item ">
         <a role="menuitem" href="/zh_CN/gioi-thieu" class="nav-link ">
             <span>关于我们</span>
         </a>
     </li>
 
-    <li role="presentation" class="nav-item  dropdown">
+    <li role="presentation" class="nav-item o_no_autohide_item dropdown">
         <a href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="menuitem" class="dropdown-toggle nav-link active ">
             <span>业务领域</span>
         </a>
@@ -135,13 +135,13 @@
         
     </li>
 
-    <li role="presentation" class="nav-item ">
+    <li role="presentation" class="nav-item o_no_autohide_item">
         <a role="menuitem" href="/zh_CN/du-an" class="nav-link ">
             <span>项目</span>
         </a>
     </li>
 
-    <li role="presentation" class="nav-item dropdown ta-mega-dropdown">
+    <li role="presentation" class="nav-item dropdown ta-mega-dropdown o_no_autohide_item">
         <a href="/zh_CN/don-vi-thanh-vien/" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside" role="menuitem" class="dropdown-toggle nav-link ta-mega-toggle" aria-expanded="false">
             <span>成员单位</span>
         </a>
@@ -757,13 +757,13 @@
         </div>
     </li>
 
-    <li role="presentation" class="nav-item ">
+    <li role="presentation" class="nav-item o_no_autohide_item">
         <a role="menuitem" href="/zh_CN/tuyen-dung" class="nav-link ">
             <span>招聘</span>
         </a>
     </li>
 
-    <li role="presentation" class="nav-item ">
+    <li role="presentation" class="nav-item o_no_autohide_item">
         <a role="menuitem" href="/zh_CN/blog/1" class="nav-link ">
             <span>新闻</span>
         </a>
@@ -1405,6 +1405,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script id="ta-member-units-script">
 (function() {
+    
+    // Prevent navbar folding into '+' and ensure Tin tức is directly visible
+    function restoreTinTucMenu() {
+        var header = document.querySelector('header');
+        if (header) {
+            header.classList.add('o_no_autohide_menu');
+        }
+        var topMenu = document.getElementById('top_menu');
+        if (topMenu) {
+            topMenu.classList.add('o_no_autohide_menu');
+            topMenu.classList.remove('o_menu_loading');
+            var extra = topMenu.querySelector('.o_extra_menu_items');
+            if (extra) {
+                var items = extra.querySelectorAll('.dropdown-menu > li, .dropdown-menu > a');
+                items.forEach(function(item) {
+                    if (item.tagName.toLowerCase() === 'li') {
+                        item.className = 'nav-item o_no_autohide_item';
+                        var a = item.querySelector('a');
+                        if (a) a.className = 'nav-link';
+                        topMenu.insertBefore(item, extra);
+                    }
+                });
+                extra.remove();
+            }
+        }
+    }
+    restoreTinTucMenu();
+    window.addEventListener('resize', restoreTinTucMenu);
+    window.addEventListener('load', restoreTinTucMenu);
+    document.addEventListener('DOMContentLoaded', restoreTinTucMenu);
+
     function initMemberUnits() {
         var containers = document.querySelectorAll('.ta-mega-menu, .ta-page-units-container');
         containers.forEach(function(container) {
