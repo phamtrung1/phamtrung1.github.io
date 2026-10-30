@@ -68,5 +68,114 @@
     } catch(err) {}
 })();
 </script>
+
+<script id="ta-member-units-script">
+(function() {
+    function initMemberUnits() {
+        var containers = document.querySelectorAll('.ta-mega-menu, .ta-page-units-container');
+        containers.forEach(function(container) {
+            var pills = container.querySelectorAll('.ta-cat-pill');
+            var cards = container.querySelectorAll('.ta-company-card');
+            var titleEl = container.querySelector('.ta-mega-main-title') || container.querySelector('.ta-page-main-title');
+            var countEl = container.querySelector('.ta-mega-count-badge') || container.querySelector('.ta-page-count-badge');
+
+            function applyCat(catId, catName) {
+                pills.forEach(function(p) {
+                    if (p.getAttribute('data-cat') === catId) {
+                        p.classList.add('active');
+                    } else {
+                        p.classList.remove('active');
+                    }
+                });
+
+                var visibleCount = 0;
+                cards.forEach(function(card) {
+                    var cardCat = card.getAttribute('data-category');
+                    if (catId === 'all' || cardCat === catId) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (titleEl) {
+                    var isEn = window.location.pathname.indexOf('/en/') !== -1;
+                    var isZh = window.location.pathname.indexOf('/zh_CN/') !== -1;
+                    var allText = isEn ? 'All Member Companies' : (isZh ? '全部成员单位' : 'Tất cả đơn vị thành viên');
+                    titleEl.textContent = (catId === 'all') ? allText : catName;
+                }
+                if (countEl) {
+                    var isEn = window.location.pathname.indexOf('/en/') !== -1;
+                    var isZh = window.location.pathname.indexOf('/zh_CN/') !== -1;
+                    var unitText = isEn ? 'companies' : (isZh ? '家单位' : 'đơn vị');
+                    countEl.textContent = visibleCount + ' ' + unitText;
+                }
+            }
+
+            pills.forEach(function(pill) {
+                var cId = pill.getAttribute('data-cat');
+                var cTextEl = pill.querySelector('.ta-cat-text');
+                var cName = cTextEl ? cTextEl.textContent.trim() : '';
+
+                pill.addEventListener('mouseenter', function() {
+                    applyCat(cId, cName);
+                });
+
+                pill.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    applyCat(cId, cName);
+                });
+            });
+
+            cards.forEach(function(card) {
+                card.addEventListener('click', function(e) {
+                    var href = card.getAttribute('href');
+                    if (!href || href === '#' || href === 'javascript:void(0)') {
+                        e.preventDefault();
+                        var compName = card.getAttribute('data-company-name') || 'Đơn vị';
+                        var isEn = window.location.pathname.indexOf('/en/') !== -1;
+                        var isZh = window.location.pathname.indexOf('/zh_CN/') !== -1;
+                        var msg = isEn ? ('Website for ' + compName + ' is being connected.') :
+                                  (isZh ? (compName + ' 的官方网站正在接入中。') :
+                                  ('Website của ' + compName + ' đang được kết nối trong hệ sinh thái.'));
+                        showTaToast(msg);
+                    }
+                });
+            });
+        });
+    }
+
+    function showTaToast(message) {
+        var container = document.querySelector('.ta-toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'ta-toast-container';
+            document.body.appendChild(container);
+        }
+        var toast = document.createElement('div');
+        toast.className = 'ta-toast';
+        toast.innerHTML = '<span>🌐</span><span>' + message + '</span>';
+        container.appendChild(toast);
+        setTimeout(function() {
+            toast.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+            setTimeout(function() {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 300);
+        }, 3200);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMemberUnits);
+    } else {
+        initMemberUnits();
+    }
+})();
+</script>
+
 </body>
 </html>

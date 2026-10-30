@@ -1375,3 +1375,327 @@
     color: #00796b !important;
 }
 
+
+
+
+/* ========================================================
+   THIEN AN GROUP - MEMBER UNITS MEGA MENU & STYLING
+   ======================================================== */
+.ta-mega-dropdown {
+    position: static !important;
+}
+#top_menu {
+    position: relative !important;
+}
+.navbar {
+    position: relative !important;
+}
+.navbar-expand-lg .navbar-nav .dropdown-menu.ta-mega-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 95vw !important;
+    max-width: 1220px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 20px 45px rgba(0, 35, 45, 0.16) !important;
+    padding: 0 !important;
+    margin-top: 10px !important;
+    overflow: hidden !important;
+    z-index: 1070 !important;
+}
+@media (min-width: 992px) {
+    .ta-mega-dropdown:hover > .ta-mega-menu {
+        display: block !important;
+        animation: taMegaFadeDown 0.22s ease-out forwards !important;
+    }
+}
+@keyframes taMegaFadeDown {
+    from { opacity: 0; transform: translate(-50%, -8px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+.ta-mega-sidebar {
+    background: #f8fafc !important;
+    border-right: 1px solid #e2e8f0 !important;
+    padding: 20px 16px !important;
+}
+.ta-mega-sidebar-header {
+    margin-bottom: 12px !important;
+    padding: 0 8px !important;
+}
+.ta-mega-cat-label {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    color: #64748b !important;
+}
+.ta-mega-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+}
+.ta-cat-pill {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    color: #334155 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    transition: all 0.18s ease !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    text-align: left !important;
+    user-select: none !important;
+}
+.ta-cat-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-width: 0 !important;
+}
+.ta-cat-icon {
+    font-size: 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 20px !important;
+}
+.ta-cat-text {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.ta-cat-badge {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+    background: #e2e8f0 !important;
+    color: #64748b !important;
+    transition: all 0.18s ease !important;
+}
+.ta-cat-pill:hover {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+.ta-cat-pill.active {
+    background: #e6f4f4 !important;
+    color: #006666 !important;
+    border-color: rgba(0, 102, 102, 0.25) !important;
+}
+.ta-cat-pill.active .ta-cat-badge {
+    background: #006666 !important;
+    color: #ffffff !important;
+}
+.ta-mega-main {
+    background: #ffffff !important;
+    padding: 20px 24px 16px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+.ta-mega-main-header {
+    margin-bottom: 14px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+.ta-mega-main-title {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    letter-spacing: -0.2px !important;
+}
+.ta-mega-count-badge {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #006666 !important;
+    background: #e6f4f4 !important;
+    padding: 3px 10px !important;
+    border-radius: 12px !important;
+}
+.ta-mega-cards-scroll {
+    max-height: 420px !important;
+    overflow-y: auto !important;
+    padding-right: 6px !important;
+}
+.ta-mega-cards-scroll::-webkit-scrollbar {
+    width: 6px !important;
+}
+.ta-mega-cards-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9 !important;
+    border-radius: 4px !important;
+}
+.ta-mega-cards-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 4px !important;
+}
+.ta-mega-cards-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
+}
+.ta-mega-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+}
+@media (max-width: 1100px) {
+    .ta-mega-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+.ta-company-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 10px 12px !important;
+    text-decoration: none !important;
+    transition: all 0.18s ease !important;
+    min-height: 60px !important;
+}
+.ta-company-card:hover {
+    background: #ffffff !important;
+    border-color: #006666 !important;
+    box-shadow: 0 4px 12px rgba(0, 102, 102, 0.12) !important;
+    transform: translateY(-2px) !important;
+}
+.ta-comp-icon {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    border-radius: 6px !important;
+    background: #e6f4f4 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 15px !important;
+    transition: all 0.18s ease !important;
+}
+.ta-company-card:hover .ta-comp-icon {
+    background: #006666 !important;
+    transform: scale(1.05) !important;
+}
+.ta-comp-body {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+.ta-comp-name {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.ta-company-card:hover .ta-comp-name {
+    color: #006666 !important;
+}
+.ta-comp-cat-tag {
+    font-size: 10.5px !important;
+    color: #64748b !important;
+    margin-top: 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.ta-comp-link-icon {
+    color: #94a3b8 !important;
+    opacity: 0.5 !important;
+    transition: all 0.18s ease !important;
+}
+.ta-company-card:hover .ta-comp-link-icon {
+    color: #006666 !important;
+    opacity: 1 !important;
+    transform: translate(2px, -2px) !important;
+}
+.ta-mega-banner {
+    background: #0b2c34 !important;
+    color: #ffffff !important;
+    padding: 14px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.ta-mega-banner-title {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 2px !important;
+}
+.ta-mega-banner-desc {
+    font-size: 12px !important;
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+.ta-mega-banner-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 7px 18px !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    border-radius: 20px !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    white-space: nowrap !important;
+}
+.ta-mega-banner-btn:hover {
+    background: #ffffff !important;
+    color: #0b2c34 !important;
+    border-color: #ffffff !important;
+}
+.text-teal { color: #006666 !important; }
+.bg-teal-subtle { background-color: #e6f4f4 !important; }
+.ta-toast-container {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 99999 !important;
+    pointer-events: none !important;
+}
+.ta-toast {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    padding: 12px 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-top: 8px !important;
+    pointer-events: auto !important;
+    animation: taToastSlideUp 0.25s ease-out forwards !important;
+    border-left: 4px solid #006666 !important;
+    max-width: 380px !important;
+}
+@keyframes taToastSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.ta-page-units-section {
+    padding: 50px 0 80px 0 !important;
+    background: #f8fafc !important;
+}
+.ta-page-units-card {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+    overflow: hidden !important;
+}
