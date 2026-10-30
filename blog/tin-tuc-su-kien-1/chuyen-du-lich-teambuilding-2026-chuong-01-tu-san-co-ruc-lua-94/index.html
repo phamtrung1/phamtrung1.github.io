@@ -428,7 +428,7 @@
     <nav aria-label="thanh điều hướng">
         <ol class="breadcrumb my-4 p-0 o_not_editable ">
             <li class="breadcrumb-item">
-                <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/">
+                <a href="/blog/" data-back-to-blog="true">
                     <i class="oi d-lg-none me-1" data-icon="chevron_backward" role="presentation"></i>Tin tức &amp; Sự kiện
                 </a>
             </li>
@@ -444,7 +444,7 @@
                     <div id="o_wblog_post_header_options">
                         
                         <div class="mb-2">
-                                <a class="badge text-decoration-none o_tag o_color_0" href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/">Tin tức sự kiện</a>
+                                <a class="badge text-decoration-none o_tag o_color_0" href="/blog/" data-back-to-blog="true">Tin tức sự kiện</a>
                         </div>
                         <div class="d-flex flex-column flex-md-row flex-md-wrap justify-content-between align-items-md-center row-gap-3 mt-5">
                             
@@ -564,7 +564,7 @@
         
         
         <div>
-                <a class="badge text-decoration-none o_tag o_color_0" href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/">Tin tức sự kiện</a>
+                <a class="badge text-decoration-none o_tag o_color_0" href="/blog/" data-back-to-blog="true">Tin tức sự kiện</a>
         </div>
     
         <div>
@@ -797,6 +797,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+</script>
+<script>
+// Blog navigation: Remember previously visited blog listing page and restore when clicking tags/breadcrumbs
+(function() {
+    try {
+        var path = window.location.pathname;
+        var search = window.location.search || '';
+        var isBlogPost = path.indexOf('/post/') !== -1 || /-[0-9]+\/?$/.test(path);
+        var isBlogList = (path.indexOf('/blog') !== -1) && !isBlogPost;
+
+        if (isBlogList) {
+            sessionStorage.setItem('ta_last_blog_page', path + search);
+        }
+
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest('a');
+            if (!a) return;
+
+            var text = (a.textContent || '').trim().toLowerCase();
+            var isTagOrBc = a.hasAttribute('data-back-to-blog') ||
+                            a.classList.contains('o_tag') ||
+                            a.classList.contains('badge') ||
+                            (a.closest('.breadcrumb-item') && (text.indexOf('tin tức') !== -1 || text.indexOf('news') !== -1)) ||
+                            text === 'tin tức sự kiện' ||
+                            text === 'tin tức & sự kiện' ||
+                            text === 'tin tức và sự kiện' ||
+                            text === 'news & events' ||
+                            text === 'hoạt động công ty' ||
+                            text === 'thi công' ||
+                            text === 'tuyển dụng';
+
+            if (isTagOrBc && isBlogPost) {
+                var isEn = path.indexOf('/en/') !== -1;
+                var defaultTarget = isEn ? '/en/blog/' : '/blog/';
+                var saved = sessionStorage.getItem('ta_last_blog_page');
+
+                if (saved) {
+                    var savedIsEn = saved.indexOf('/en/') !== -1;
+                    if (savedIsEn === isEn && saved.indexOf('/blog') !== -1) {
+                        e.preventDefault();
+                        window.location.href = saved;
+                        return;
+                    }
+                }
+
+                if (document.referrer) {
+                    var ref = document.referrer;
+                    if (ref.indexOf('/blog') !== -1 && !/-[0-9]+\/?$/.test(ref) && ref.indexOf('/post/') === -1) {
+                        e.preventDefault();
+                        window.location.href = ref;
+                        return;
+                    }
+                }
+
+                e.preventDefault();
+                window.location.href = defaultTarget;
+            }
+        });
+    } catch(err) {}
+})();
 </script>
 </body>
 

@@ -510,7 +510,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Tháng Tám đến, mở ra giai đoạn tăng tốc với nhiều mục tiêu, dự án và cơ hội phát triển mới đang chờ đón phía trước. Với định hướng không ngừng mở rộng và nâng cao chất lượng đội ngũ, Thiên Ân tiếp tục tìm kiếm những ứng viên có năng lực, tinh thần trách nhiệm và khát khao phát triển để cùng đồng hành, chinh phục những cột mốc mới và kiến tạo những giá trị bền vững.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
+            <a href="/blog/" data-back-to-blog="true" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
     </div>
         </div>
         
@@ -552,7 +552,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Công ty Cổ phần Đầu tư Thiên Ân chính thức tuyển dụng nhiều vị trí thuộc Khối Văn phòng và Khối Công trình tại Hà Nội, Bắc Ninh/ Bắc Giang và Thái Nguyên.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
+            <a href="/blog/" data-back-to-blog="true" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
     </div>
         </div>
         
@@ -594,7 +594,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Bản tin tuyển dụng tháng 5 của Thiên Ân đã chính thức lên sóng, mang đến nhiều cơ hội việc làm hấp dẫn ở đa dạng vị trí. Chúng tôi luôn tìm kiếm những ứng viên năng động, trách nhiệm và sẵn sàng phát triển bản thân trong môi trường chuyên nghiệp, sáng tạo. Nếu bạn đang tìm kiếm một nơi để bứt phá và khẳng định giá trị, Thiên Ân chính là điểm đến dành cho bạn.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
+            <a href="/blog/" data-back-to-blog="true" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
     </div>
         </div>
         
@@ -636,7 +636,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Cơ hội nghề nghiệp dành cho những ứng viên sẵn sàng thử thách, dám bứt phá và đồng hành cùng Thiên Ân trên hành trình phát triển.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
+            <a href="/blog/" data-back-to-blog="true" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
     </div>
         </div>
         
@@ -678,7 +678,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">TIN HOT CUỐI NĂM. Chúng tôi cần tìm đồng đội để chinh phục những công trình mới! THIÊN ÂN IJSC - Nơi anh chị em newbie không chỉ làm việc, mà còn được học việc. Tham gia chương trình đào tạo chuyên sâu 1-1 với các chuyên gia hàng đầu của chúng tôi. Nơi anh chị chuyên viên có cơ hội phát triển, sẵn sàng cho bước nhảy vọt lên vị trí Quản lý.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
+            <a href="/blog/" data-back-to-blog="true" class="badge o_tag o_color_0" rel="nofollow">Tuyển dụng</a>
     </div>
         </div>
         
@@ -813,6 +813,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+</script>
+<script>
+// Blog navigation: Remember previously visited blog listing page and restore when clicking tags/breadcrumbs
+(function() {
+    try {
+        var path = window.location.pathname;
+        var search = window.location.search || '';
+        var isBlogPost = path.indexOf('/post/') !== -1 || /-[0-9]+\/?$/.test(path);
+        var isBlogList = (path.indexOf('/blog') !== -1) && !isBlogPost;
+
+        if (isBlogList) {
+            sessionStorage.setItem('ta_last_blog_page', path + search);
+        }
+
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest('a');
+            if (!a) return;
+
+            var text = (a.textContent || '').trim().toLowerCase();
+            var isTagOrBc = a.hasAttribute('data-back-to-blog') ||
+                            a.classList.contains('o_tag') ||
+                            a.classList.contains('badge') ||
+                            (a.closest('.breadcrumb-item') && (text.indexOf('tin tức') !== -1 || text.indexOf('news') !== -1)) ||
+                            text === 'tin tức sự kiện' ||
+                            text === 'tin tức & sự kiện' ||
+                            text === 'tin tức và sự kiện' ||
+                            text === 'news & events' ||
+                            text === 'hoạt động công ty' ||
+                            text === 'thi công' ||
+                            text === 'tuyển dụng';
+
+            if (isTagOrBc && isBlogPost) {
+                var isEn = path.indexOf('/en/') !== -1;
+                var defaultTarget = isEn ? '/en/blog/' : '/blog/';
+                var saved = sessionStorage.getItem('ta_last_blog_page');
+
+                if (saved) {
+                    var savedIsEn = saved.indexOf('/en/') !== -1;
+                    if (savedIsEn === isEn && saved.indexOf('/blog') !== -1) {
+                        e.preventDefault();
+                        window.location.href = saved;
+                        return;
+                    }
+                }
+
+                if (document.referrer) {
+                    var ref = document.referrer;
+                    if (ref.indexOf('/blog') !== -1 && !/-[0-9]+\/?$/.test(ref) && ref.indexOf('/post/') === -1) {
+                        e.preventDefault();
+                        window.location.href = ref;
+                        return;
+                    }
+                }
+
+                e.preventDefault();
+                window.location.href = defaultTarget;
+            }
+        });
+    } catch(err) {}
+})();
 </script>
 </body>
 

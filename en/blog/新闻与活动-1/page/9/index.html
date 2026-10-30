@@ -522,7 +522,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Thien An is one of the investors capable of implementing multiple projects in Vietnam. With over 10 years of experience in investment and construction, Thien An is gradually building its reputation through large-scale, high-quality projects and an ecosystem of products and services that enhance the quality of life for the community. The Company has met the criteria for financial capacity, investment capability, and experience in project implementation, management, operation and exploitation. To keep pace with urban economic development, Bac Giang Province has set out a plan to focus on completing commercial housing projects in the province from now until 2025, including the HH4 Commercial Service and Housing Complex project invested by Thien An Investment Joint Stock Company.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0">News &amp; Events</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">News &amp; Events</a>
     </div>
         </div>
         
@@ -564,7 +564,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Selected projects for which Thien An Investment Joint Stock Company is the Investor. Lac Phu 3 Residential Area Project, Canh Thuy Commune, Yen Dung District, Bac Giang Province Address: Canh Thuy Com...</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/chinh-sach-nhan-su-cong-ty-3/" class="badge o_tag o_color_0">Construction</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">Construction</a>
     </div>
         </div>
         
@@ -606,7 +606,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">1 . Construction and installation bid package: New construction of the Ho Cong Du Road extension connecting to Nguyen The Nho Road Construction role: Construction and installation. Address: Viet Yen D...</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/chinh-sach-nhan-su-cong-ty-3/" class="badge o_tag o_color_0">Construction</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">Construction</a>
     </div>
         </div>
         
@@ -648,7 +648,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Together, we have built and delivered quality, safe and convenient works that serve the lives of people in many localities.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/chinh-sach-nhan-su-cong-ty-3/" class="badge o_tag o_color_0">Construction</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">Construction</a>
     </div>
         </div>
         
@@ -690,7 +690,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">We constantly strive to perfect our organizational structure, with managers, staff and technicians who are professional in their skills and expertise, of good character and with a strong sense of responsibility toward their work. The Company&#39;s team of personnel has accompanied the Company in building high-quality works.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/khu-dan-cu-lac-phu-3-the-phoenix-garden-huyen-yen-dung-du-an-2/" class="badge o_tag o_color_0">Company activities</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">Company activities</a>
     </div>
         </div>
         
@@ -732,7 +732,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">Since 2022, Bac Giang has rapidly become a vibrant real estate market with the emergence of a series of “million-dollar” projects. The investment wave grew even stronger when the Deputy Prime Minister signed Decision No. 219/QĐ-TTg approving the Master Plan for the 2021 - 2030 period, with a vision to 2050. Accordingly, by 2030, Bac Giang will become a modern industrial province.</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0">News &amp; Events</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">News &amp; Events</a>
     </div>
         </div>
         
@@ -774,7 +774,7 @@
     </a>
     <p class="o_wblog_teaser o_line_clamp small" dir="auto">First of all, on behalf of Thien An Investment Joint Stock Company, I would like to extend my warmest greetings and most sincere thanks to our valued customers, partners, relevant authorities and all Thien An employees for your cooperation and support over the past period. In line with the trend of integration and the ability to seize many opportunities, Thien An has been focusing all of its resources on investing in and developing the fields regarded as the Company&#39;s core businesses and strengths. Thien An has step by step affirmed its position in construction, infrastructure construction and project investment (residential areas, urban areas, hotels, high-tech agriculture...).</p>
     <div class="d-flex flex-wrap gap-1 mb-3">
-            <a href="/blog/tin-tuc-su-kien-1/thu-ngo-cua-chu-tich-hoi-dong-quan-tri-1/" class="badge o_tag o_color_0">News &amp; Events</a>
+            <a href="/en/blog/" data-back-to-blog="true" class="badge o_tag o_color_0">News &amp; Events</a>
     </div>
         </div>
         
@@ -939,6 +939,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+</script>
+<script>
+// Blog navigation: Remember previously visited blog listing page and restore when clicking tags/breadcrumbs
+(function() {
+    try {
+        var path = window.location.pathname;
+        var search = window.location.search || '';
+        var isBlogPost = path.indexOf('/post/') !== -1 || /-[0-9]+\/?$/.test(path);
+        var isBlogList = (path.indexOf('/blog') !== -1) && !isBlogPost;
+
+        if (isBlogList) {
+            sessionStorage.setItem('ta_last_blog_page', path + search);
+        }
+
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest('a');
+            if (!a) return;
+
+            var text = (a.textContent || '').trim().toLowerCase();
+            var isTagOrBc = a.hasAttribute('data-back-to-blog') ||
+                            a.classList.contains('o_tag') ||
+                            a.classList.contains('badge') ||
+                            (a.closest('.breadcrumb-item') && (text.indexOf('tin tức') !== -1 || text.indexOf('news') !== -1)) ||
+                            text === 'tin tức sự kiện' ||
+                            text === 'tin tức & sự kiện' ||
+                            text === 'tin tức và sự kiện' ||
+                            text === 'news & events' ||
+                            text === 'hoạt động công ty' ||
+                            text === 'thi công' ||
+                            text === 'tuyển dụng';
+
+            if (isTagOrBc && isBlogPost) {
+                var isEn = path.indexOf('/en/') !== -1;
+                var defaultTarget = isEn ? '/en/blog/' : '/blog/';
+                var saved = sessionStorage.getItem('ta_last_blog_page');
+
+                if (saved) {
+                    var savedIsEn = saved.indexOf('/en/') !== -1;
+                    if (savedIsEn === isEn && saved.indexOf('/blog') !== -1) {
+                        e.preventDefault();
+                        window.location.href = saved;
+                        return;
+                    }
+                }
+
+                if (document.referrer) {
+                    var ref = document.referrer;
+                    if (ref.indexOf('/blog') !== -1 && !/-[0-9]+\/?$/.test(ref) && ref.indexOf('/post/') === -1) {
+                        e.preventDefault();
+                        window.location.href = ref;
+                        return;
+                    }
+                }
+
+                e.preventDefault();
+                window.location.href = defaultTarget;
+            }
+        });
+    } catch(err) {}
+})();
 </script>
 </body>
 
