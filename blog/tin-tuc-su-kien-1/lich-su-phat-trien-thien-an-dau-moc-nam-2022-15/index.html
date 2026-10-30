@@ -960,9 +960,7 @@
                     
         <li data-name="Language Selector" class="o_header_language_selector ">
             <div class="ta-lang-switch dropdown js_language_selector d-print-none">
-                <button type="button" class="ta-lang-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Tiếng Việt" aria-label="Tiếng Việt">
-                    <img class="ta-flag" width="22" height="15" alt="" loading="eager" src="/thienan_website/static/src/img/flags/vn.svg"/>
-                </button>
+                <button type="button" class="ta-lang-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Tiếng Việt" aria-label="Tiếng Việt"><img class="ta-flag" width="22" height="15" alt="" loading="eager" src="/thienan_website/static/src/img/flags/vn.svg"/></button>
                 <div class="dropdown-menu dropdown-menu-end ta-lang-menu" role="menu">
                         <a role="menuitem" href="/blog/tin-tuc-su-kien-1/lich-su-phat-trien-thien-an-dau-moc-nam-2022-15/" class="dropdown-item js_change_lang active" data-url_code="vi" hreflang="vi">
                             <img class="ta-flag" width="22" height="15" alt="" loading="eager" src="/thienan_website/static/src/img/flags/vn.svg"/>
@@ -1194,9 +1192,7 @@
                         
         <li data-name="Language Selector" class="o_header_language_selector ">
             <div class="ta-lang-switch dropdown js_language_selector d-print-none">
-                <button type="button" class="ta-lang-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Tiếng Việt" aria-label="Tiếng Việt">
-                    <img class="ta-flag" width="22" height="15" alt="" loading="eager" src="/thienan_website/static/src/img/flags/vn.svg"/>
-                </button>
+                <button type="button" class="ta-lang-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Tiếng Việt" aria-label="Tiếng Việt"><img class="ta-flag" width="22" height="15" alt="" loading="eager" src="/thienan_website/static/src/img/flags/vn.svg"/></button>
                 <div class="dropdown-menu dropdown-menu-end ta-lang-menu" role="menu">
                         <a role="menuitem" href="/blog/tin-tuc-su-kien-1/lich-su-phat-trien-thien-an-dau-moc-nam-2022-15/" class="dropdown-item js_change_lang active" data-url_code="vi" hreflang="vi">
                             <img class="ta-flag" width="22" height="15" alt="" loading="eager" src="/thienan_website/static/src/img/flags/vn.svg"/>
@@ -1921,7 +1917,46 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    
+    function fixLanguageSelector() {
+        var p = window.location.pathname;
+        var isZh = p.indexOf('/zh_CN/') !== -1 || p === '/zh_CN' || p === '/zh_CN/';
+        var isEn = (p.indexOf('/en/') !== -1 || p === '/en' || p === '/en/') && !isZh;
+        var isVi = !isZh && !isEn;
+
+        var btns = document.querySelectorAll('.ta-lang-switch .ta-lang-btn, .js_language_selector .dropdown-toggle');
+        btns.forEach(function(btn) {
+            var img = btn.querySelector('img');
+            if (!img) return;
+            if (isZh) {
+                btn.title = '中文 (Chinese)';
+                btn.setAttribute('aria-label', '中文 (Chinese)');
+                img.src = '/thienan_website/static/src/img/flags/cn.svg';
+            } else if (isEn) {
+                btn.title = 'English';
+                btn.setAttribute('aria-label', 'English');
+                img.src = '/thienan_website/static/src/img/flags/gb.svg';
+            } else {
+                btn.title = 'Tiếng Việt';
+                btn.setAttribute('aria-label', 'Tiếng Việt');
+                img.src = '/thienan_website/static/src/img/flags/vn.svg';
+            }
+        });
+
+        var activeCode = isZh ? 'zh_CN' : (isEn ? 'en' : 'vi');
+        var items = document.querySelectorAll('.ta-lang-menu .dropdown-item, .js_language_selector .dropdown-item');
+        items.forEach(function(item) {
+            var code = item.getAttribute('data-url_code') || item.getAttribute('hreflang');
+            if (code === activeCode || (activeCode === 'zh_CN' && code === 'zh') || (activeCode === 'en' && code === 'en_US')) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
     function initAll() {
+        fixLanguageSelector();
         initHoverBehavior();
         initMegaFilter();
         ensureTinTucVisible();
