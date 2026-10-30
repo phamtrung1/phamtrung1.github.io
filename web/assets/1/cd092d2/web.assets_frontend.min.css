@@ -1765,8 +1765,78 @@
 }
 
 /* Strictly hide and eliminate any extra items toggle '+' */
-.o_extra_menu_items {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+
+
+
+
+/* ========================================================
+   GUARANTEE ALL 7 NAVBAR ITEMS AND TIN TỨC FIT DIRECTLY ON ONE ROW
+   ======================================================== */
+.o_header_standard #top_menu {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    margin-right: auto !important;
+}
+
+.o_header_standard #top_menu > .nav-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.o_header_standard #top_menu > .nav-item > .nav-link {
+    display: inline-block !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.2px !important;
+}
+
+@media (min-width: 992px) {
+    .o_header_standard #o_main_nav.container {
+        max-width: 100% !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+    .o_header_standard .navbar-brand {
+        margin-right: 0.6rem !important;
+    }
+    .o_header_standard .navbar-brand img {
+        max-height: 36px !important;
+    }
+    .o_header_standard .navbar-nav.align-items-center {
+        gap: 6px !important;
+        padding-left: 6px !important;
+    }
+    .o_header_standard .btn_cta {
+        padding: 6px 14px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .o_header_standard #o_main_nav.container {
+        max-width: 1280px !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .o_header_standard #top_menu > .nav-item > .nav-link {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        font-size: 13.5px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .o_header_standard #o_main_nav.container {
+        max-width: 1360px !important;
+    }
+    .o_header_standard #top_menu > .nav-item > .nav-link {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        font-size: 14px !important;
+    }
 }

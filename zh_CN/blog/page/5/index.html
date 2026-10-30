@@ -1902,34 +1902,58 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
     
     // Prevent navbar folding into '+' and ensure Tin tức is directly visible
-    function restoreTinTucMenu() {
-        var header = document.querySelector('header');
-        if (header) {
-            header.classList.add('o_no_autohide_menu');
-        }
+    
+    // Force Tin tức item to always be in #top_menu and visible
+    function ensureTinTucVisible() {
         var topMenu = document.getElementById('top_menu');
-        if (topMenu) {
-            topMenu.classList.add('o_no_autohide_menu');
-            topMenu.classList.remove('o_menu_loading');
-            var extra = topMenu.querySelector('.o_extra_menu_items');
-            if (extra) {
-                var items = extra.querySelectorAll('.dropdown-menu > li, .dropdown-menu > a');
-                items.forEach(function(item) {
-                    if (item.tagName.toLowerCase() === 'li') {
-                        item.className = 'nav-item o_no_autohide_item';
-                        var a = item.querySelector('a');
-                        if (a) a.className = 'nav-link';
-                        topMenu.insertBefore(item, extra);
-                    }
-                });
-                extra.remove();
+        if (!topMenu) return;
+        topMenu.classList.remove('o_menu_loading');
+        
+        // Find Tin tức link
+        var tinTucLink = topMenu.querySelector('a[href="/blog/"]') || 
+                         topMenu.querySelector('a[href*="/blog"]') ||
+                         document.querySelector('.o_extra_menu_items a[href*="/blog"]');
+        
+        if (tinTucLink) {
+            var li = tinTucLink.closest('li');
+            if (li) {
+                li.style.display = 'inline-flex';
+                li.style.visibility = 'visible';
+                li.classList.add('nav-item');
+                li.classList.remove('dropdown-item');
+                tinTucLink.className = 'nav-link';
+                if (window.location.pathname.indexOf('/blog') !== -1) {
+                    tinTucLink.classList.add('active');
+                }
+                if (li.parentElement !== topMenu) {
+                    topMenu.appendChild(li);
+                }
             }
         }
+        
+        // Unfold any item placed in extra items
+        var extra = topMenu.querySelector('.o_extra_menu_items');
+        if (extra) {
+            var remainingChildren = extra.querySelectorAll('.dropdown-menu > li, .dropdown-menu > a');
+            remainingChildren.forEach(function(item) {
+                if (item.tagName.toLowerCase() === 'li') {
+                    item.className = 'nav-item';
+                    item.style.display = 'inline-flex';
+                    var a = item.querySelector('a');
+                    if (a) a.className = 'nav-link';
+                    topMenu.insertBefore(item, extra);
+                }
+            });
+            extra.remove();
+        }
     }
-    restoreTinTucMenu();
-    window.addEventListener('resize', restoreTinTucMenu);
-    window.addEventListener('load', restoreTinTucMenu);
-    document.addEventListener('DOMContentLoaded', restoreTinTucMenu);
+    ensureTinTucVisible();
+    window.addEventListener('load', ensureTinTucVisible);
+    window.addEventListener('resize', ensureTinTucVisible);
+    document.addEventListener('DOMContentLoaded', ensureTinTucVisible);
+    setTimeout(ensureTinTucVisible, 50);
+    setTimeout(ensureTinTucVisible, 300);
+
 
     function initMemberUnits() {
         var containers = document.querySelectorAll('.ta-mega-menu, .ta-page-units-container');
