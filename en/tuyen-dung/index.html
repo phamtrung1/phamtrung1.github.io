@@ -101,15 +101,16 @@
     </li>
 
     
+    
     <li role="presentation" class="nav-item dropdown ta-mega-dropdown ta-mega-linhvuc-dropdown o_no_autohide_item">
         <a href="/en/linh-vuc-hoat-dong" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside" role="menuitem" class="dropdown-toggle nav-link ta-mega-toggle" aria-expanded="false">
             <span>Business</span>
         </a>
         <div class="dropdown-menu ta-mega-menu shadow-lg border-0" role="menu">
-            <div class="ta-mega-inner container-fluid px-3 px-xl-5">
-                <div class="row g-0">
+            <div class="ta-mega-inner w-100 p-0 m-0">
+                <div class="row g-0 w-100 m-0">
                     <!-- Sidebar Categories (Left) -->
-                    <div class="col-lg-3 col-xl-3 ta-mega-sidebar">
+                    <div class="col-lg-3 col-xl-2 ta-mega-sidebar">
                         <div class="ta-mega-sidebar-header">
                             <div class="ta-mega-cat-label">Business Sectors</div>
                         </div>
@@ -174,7 +175,7 @@
                     </div>
 
                     <!-- Main Cards (Right) -->
-                    <div class="col-lg-9 col-xl-9 ta-mega-main">
+                    <div class="col-lg-9 col-xl-10 ta-mega-main">
                         <div class="ta-mega-main-header d-flex justify-content-between align-items-center">
                             <h4 class="ta-mega-main-title mb-0">All Business Sectors</h4>
                             <span class="ta-mega-count-badge">6 sectors</span>
@@ -272,7 +273,7 @@
                 </div>
 
                 <!-- Footer Strip -->
-                <div class="ta-mega-banner">
+                <div class="ta-mega-banner w-100 m-0">
                     <div class="ta-mega-banner-info">
                         <div class="ta-mega-banner-title">Business Sectors</div>
                         <div class="ta-mega-banner-desc">Pioneering position - Creating prosperous living values with Thien An Group</div>
@@ -293,15 +294,16 @@
     </li>
 
     
+    
     <li role="presentation" class="nav-item dropdown ta-mega-dropdown o_no_autohide_item">
         <a href="/en/don-vi-thanh-vien/" data-bs-toggle="dropdown" data-bs-display="static" data-bs-auto-close="outside" role="menuitem" class="dropdown-toggle nav-link ta-mega-toggle" aria-expanded="false">
             <span>Member Companies</span>
         </a>
         <div class="dropdown-menu ta-mega-menu shadow-lg border-0" role="menu">
-            <div class="ta-mega-inner container-fluid px-3 px-xl-5">
-                <div class="row g-0">
+            <div class="ta-mega-inner w-100 p-0 m-0">
+                <div class="row g-0 w-100 m-0">
                     <!-- Sidebar Categories (Left) -->
-                    <div class="col-lg-3 col-xl-3 ta-mega-sidebar">
+                    <div class="col-lg-3 col-xl-2 ta-mega-sidebar">
                         <div class="ta-mega-sidebar-header">
                             <div class="ta-mega-cat-label">Industry Sectors</div>
                         </div>
@@ -374,7 +376,7 @@
                     </div>
 
                     <!-- Main Company Cards (Right) -->
-                    <div class="col-lg-9 col-xl-9 ta-mega-main">
+                    <div class="col-lg-9 col-xl-10 ta-mega-main">
                         <div class="ta-mega-main-header d-flex justify-content-between align-items-center">
                             <h4 class="ta-mega-main-title mb-0">All Member Companies</h4>
                             <span class="ta-mega-count-badge">39 companies</span>
@@ -895,7 +897,7 @@
                 </div>
 
                 <!-- Footer Strip (exactly like TSI reference) -->
-                <div class="ta-mega-banner">
+                <div class="ta-mega-banner w-100 m-0">
                     <div class="ta-mega-banner-info">
                         <div class="ta-mega-banner-title">Member Companies</div>
                         <div class="ta-mega-banner-desc">Multi-sector ecosystem - Sustainable growth with Thien An Group</div>
@@ -1551,6 +1553,105 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script id="ta-member-units-script">
 (function() {
+    var closeTimer = null;
+    var activeMenu = null;
+
+    function openMegaMenu(dropdownEl, menuEl) {
+        clearTimeout(closeTimer);
+        var allMenus = document.querySelectorAll('.ta-mega-menu');
+        var allDropdowns = document.querySelectorAll('.ta-mega-dropdown');
+        allMenus.forEach(function(m) {
+            if (m !== menuEl) {
+                m.classList.remove('ta-mega-show');
+                m.style.removeProperty('display');
+            }
+        });
+        allDropdowns.forEach(function(d) {
+            if (d !== dropdownEl) d.classList.remove('ta-mega-active');
+        });
+
+        dropdownEl.classList.add('ta-mega-active');
+        menuEl.classList.add('ta-mega-show');
+        menuEl.style.setProperty('display', 'block', 'important');
+        activeMenu = menuEl;
+    }
+
+    function scheduleCloseMegaMenu(dropdownEl, menuEl) {
+        clearTimeout(closeTimer);
+        // 450ms grace period so user can comfortably move mouse diagonally across the navbar into the menu
+        closeTimer = setTimeout(function() {
+            dropdownEl.classList.remove('ta-mega-active');
+            menuEl.classList.remove('ta-mega-show');
+            menuEl.style.removeProperty('display');
+            if (activeMenu === menuEl) activeMenu = null;
+        }, 450);
+    }
+
+    function closeAllMegaNow() {
+        clearTimeout(closeTimer);
+        document.querySelectorAll('.ta-mega-menu').forEach(function(m) {
+            m.classList.remove('ta-mega-show');
+            m.style.removeProperty('display');
+        });
+        document.querySelectorAll('.ta-mega-dropdown').forEach(function(d) {
+            d.classList.remove('ta-mega-active');
+        });
+        activeMenu = null;
+    }
+
+    function initHoverBehavior() {
+        var dropdowns = document.querySelectorAll('.ta-mega-dropdown');
+        dropdowns.forEach(function(dropdown) {
+            var menu = dropdown.querySelector('.ta-mega-menu');
+            if (!menu) return;
+
+            // 1. Mouse enters navbar dropdown
+            dropdown.addEventListener('mouseenter', function() {
+                openMegaMenu(dropdown, menu);
+            });
+
+            // 2. Mouse leaves navbar dropdown item
+            dropdown.addEventListener('mouseleave', function(e) {
+                if (e.relatedTarget && menu.contains(e.relatedTarget)) {
+                    return; // moving directly into the menu
+                }
+                scheduleCloseMegaMenu(dropdown, menu);
+            });
+
+            // 3. Mouse enters mega menu itself: CANCEL close timer, keep open indefinitely
+            menu.addEventListener('mouseenter', function() {
+                clearTimeout(closeTimer);
+                dropdown.classList.add('ta-mega-active');
+                menu.classList.add('ta-mega-show');
+                menu.style.setProperty('display', 'block', 'important');
+                activeMenu = menu;
+            });
+
+            // 4. Mouse leaves mega menu itself: close after grace period
+            menu.addEventListener('mouseleave', function(e) {
+                if (e.relatedTarget && dropdown.contains(e.relatedTarget)) {
+                    return; // moving back to dropdown link
+                }
+                scheduleCloseMegaMenu(dropdown, menu);
+            });
+        });
+
+        // 5. Hovering on any other navbar item closes open mega menus immediately
+        var otherNavItems = document.querySelectorAll('#top_menu > li:not(.ta-mega-dropdown)');
+        otherNavItems.forEach(function(item) {
+            item.addEventListener('mouseenter', function() {
+                closeAllMegaNow();
+            });
+        });
+
+        // 6. Click outside closes mega menus
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.ta-mega-dropdown') && !e.target.closest('.ta-mega-menu')) {
+                closeAllMegaNow();
+            }
+        });
+    }
+
     function initMegaFilter() {
         var containers = document.querySelectorAll('.ta-mega-menu, .ta-page-units-container');
         containers.forEach(function(container) {
@@ -1664,7 +1765,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3200);
     }
 
-    // Force Tin tức to always be visible in #top_menu
     function ensureTinTucVisible() {
         var topMenu = document.getElementById('top_menu');
         if (!topMenu) return;
@@ -1707,14 +1807,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            initMegaFilter();
-            ensureTinTucVisible();
-        });
-    } else {
+    function initAll() {
+        initHoverBehavior();
         initMegaFilter();
         ensureTinTucVisible();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+        initAll();
     }
     window.addEventListener('load', ensureTinTucVisible);
     window.addEventListener('resize', ensureTinTucVisible);

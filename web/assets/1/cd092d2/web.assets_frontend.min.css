@@ -1935,3 +1935,146 @@
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }
+
+
+
+/* ========================================================
+   FULL-SCREEN EDGE-TO-EDGE MEGA MENUS (NO SIDE GUTTERS)
+   ======================================================== */
+.o_header_standard {
+    position: relative !important;
+}
+
+.o_header_standard .navbar,
+.o_header_standard #o_main_nav,
+.o_header_standard #top_menu,
+.o_header_standard #top_menu_collapse,
+.o_header_standard #top_menu_container,
+.o_header_standard .ta-mega-dropdown {
+    position: static !important;
+}
+
+.o_header_standard .navbar-expand-lg .navbar-nav .dropdown-menu.ta-mega-menu,
+.ta-mega-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    border: none !important;
+    border-bottom: 3px solid #006666 !important;
+    border-radius: 0 0 16px 16px !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.22) !important;
+    background: #ffffff !important;
+    z-index: 1070 !important;
+    overflow: hidden !important;
+    display: none;
+}
+
+/* Invisible bridge between navbar and mega menu so hover never disconnects */
+.ta-mega-menu::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: transparent;
+    pointer-events: auto;
+}
+
+@media (min-width: 992px) {
+    .ta-mega-dropdown:hover > .ta-mega-menu,
+    .ta-mega-dropdown.ta-mega-active > .ta-mega-menu,
+    .ta-mega-menu.ta-mega-show,
+    .ta-mega-dropdown > .ta-mega-menu.show {
+        display: block !important;
+        animation: taMegaFadeDown 0.16s ease-out forwards !important;
+    }
+}
+
+.ta-mega-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Left Sidebar: starts directly at x=0 (left edge of screen) */
+.ta-mega-sidebar {
+    background: #f8fafc !important;
+    border-right: 1px solid #e2e8f0 !important;
+    padding: 22px 18px 22px 32px !important;
+}
+
+/* Right Main Area: ends directly at x=100% (right edge of screen) */
+.ta-mega-main {
+    background: #ffffff !important;
+    padding: 22px 32px 18px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Bottom Banner: extends 100% edge-to-edge with no side gaps */
+.ta-mega-banner {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 14px 32px !important;
+    background: #0b2c34 !important;
+    border-radius: 0 0 16px 16px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Base Card Styles */
+.ta-company-card, .ta-field-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-decoration: none !important;
+    transition: all 0.18s ease;
+    min-height: 62px;
+}
+
+.ta-company-card:hover, .ta-field-card:hover {
+    background: #ffffff !important;
+    border-color: #006666 !important;
+    box-shadow: 0 4px 14px rgba(0, 102, 102, 0.14) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* STRICT FILTERING HIDE RULE WITH !important */
+.ta-company-card.ta-hidden,
+.ta-field-card.ta-hidden,
+[data-category].ta-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.ta-mega-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+}
+
+@media (min-width: 1400px) {
+    .ta-mega-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    .ta-mega-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}

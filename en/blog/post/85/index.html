@@ -71,6 +71,105 @@
 
 <script id="ta-member-units-script">
 (function() {
+    var closeTimer = null;
+    var activeMenu = null;
+
+    function openMegaMenu(dropdownEl, menuEl) {
+        clearTimeout(closeTimer);
+        var allMenus = document.querySelectorAll('.ta-mega-menu');
+        var allDropdowns = document.querySelectorAll('.ta-mega-dropdown');
+        allMenus.forEach(function(m) {
+            if (m !== menuEl) {
+                m.classList.remove('ta-mega-show');
+                m.style.removeProperty('display');
+            }
+        });
+        allDropdowns.forEach(function(d) {
+            if (d !== dropdownEl) d.classList.remove('ta-mega-active');
+        });
+
+        dropdownEl.classList.add('ta-mega-active');
+        menuEl.classList.add('ta-mega-show');
+        menuEl.style.setProperty('display', 'block', 'important');
+        activeMenu = menuEl;
+    }
+
+    function scheduleCloseMegaMenu(dropdownEl, menuEl) {
+        clearTimeout(closeTimer);
+        // 450ms grace period so user can comfortably move mouse diagonally across the navbar into the menu
+        closeTimer = setTimeout(function() {
+            dropdownEl.classList.remove('ta-mega-active');
+            menuEl.classList.remove('ta-mega-show');
+            menuEl.style.removeProperty('display');
+            if (activeMenu === menuEl) activeMenu = null;
+        }, 450);
+    }
+
+    function closeAllMegaNow() {
+        clearTimeout(closeTimer);
+        document.querySelectorAll('.ta-mega-menu').forEach(function(m) {
+            m.classList.remove('ta-mega-show');
+            m.style.removeProperty('display');
+        });
+        document.querySelectorAll('.ta-mega-dropdown').forEach(function(d) {
+            d.classList.remove('ta-mega-active');
+        });
+        activeMenu = null;
+    }
+
+    function initHoverBehavior() {
+        var dropdowns = document.querySelectorAll('.ta-mega-dropdown');
+        dropdowns.forEach(function(dropdown) {
+            var menu = dropdown.querySelector('.ta-mega-menu');
+            if (!menu) return;
+
+            // 1. Mouse enters navbar dropdown
+            dropdown.addEventListener('mouseenter', function() {
+                openMegaMenu(dropdown, menu);
+            });
+
+            // 2. Mouse leaves navbar dropdown item
+            dropdown.addEventListener('mouseleave', function(e) {
+                if (e.relatedTarget && menu.contains(e.relatedTarget)) {
+                    return; // moving directly into the menu
+                }
+                scheduleCloseMegaMenu(dropdown, menu);
+            });
+
+            // 3. Mouse enters mega menu itself: CANCEL close timer, keep open indefinitely
+            menu.addEventListener('mouseenter', function() {
+                clearTimeout(closeTimer);
+                dropdown.classList.add('ta-mega-active');
+                menu.classList.add('ta-mega-show');
+                menu.style.setProperty('display', 'block', 'important');
+                activeMenu = menu;
+            });
+
+            // 4. Mouse leaves mega menu itself: close after grace period
+            menu.addEventListener('mouseleave', function(e) {
+                if (e.relatedTarget && dropdown.contains(e.relatedTarget)) {
+                    return; // moving back to dropdown link
+                }
+                scheduleCloseMegaMenu(dropdown, menu);
+            });
+        });
+
+        // 5. Hovering on any other navbar item closes open mega menus immediately
+        var otherNavItems = document.querySelectorAll('#top_menu > li:not(.ta-mega-dropdown)');
+        otherNavItems.forEach(function(item) {
+            item.addEventListener('mouseenter', function() {
+                closeAllMegaNow();
+            });
+        });
+
+        // 6. Click outside closes mega menus
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.ta-mega-dropdown') && !e.target.closest('.ta-mega-menu')) {
+                closeAllMegaNow();
+            }
+        });
+    }
+
     function initMegaFilter() {
         var containers = document.querySelectorAll('.ta-mega-menu, .ta-page-units-container');
         containers.forEach(function(container) {
@@ -184,7 +283,6 @@
         }, 3200);
     }
 
-    // Force Tin tức to always be visible in #top_menu
     function ensureTinTucVisible() {
         var topMenu = document.getElementById('top_menu');
         if (!topMenu) return;
@@ -227,14 +325,16 @@
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            initMegaFilter();
-            ensureTinTucVisible();
-        });
-    } else {
+    function initAll() {
+        initHoverBehavior();
         initMegaFilter();
         ensureTinTucVisible();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+        initAll();
     }
     window.addEventListener('load', ensureTinTucVisible);
     window.addEventListener('resize', ensureTinTucVisible);
