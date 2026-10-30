@@ -1342,3 +1342,36 @@
 
 
 
+
+
+/* 3 Columns Layout for Recommended Posts (ta-related-posts-grid) */
+.ta-related-posts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 2rem !important;
+}
+
+@media (max-width: 767.98px) {
+    .ta-related-posts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+}
+
+.ta-related-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.ta-related-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+    border-color: #00796b !important;
+}
+
+.ta-related-card:hover h3 {
+    color: #00796b !important;
+}
+
